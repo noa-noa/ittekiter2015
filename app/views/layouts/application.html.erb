@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, user-scalable=yes" /> -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="msapplication-tap-highlight" content="no">
+	<title>ittekiter</title>
+	<%= stylesheet_link_tag "style" %>
+	<%= stylesheet_link_tag "default" %>
+	<%= stylesheet_link_tag "default.date" %>
+	<%= stylesheet_link_tag "default.time" %>
+	<%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyBVXa1bC_3jj_SkcWXvAQVjvNU-9MT-BGk&libraries=places&sensor=true" %>
+	<%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.4/less.min.js" %>
+	<%= javascript_include_tag "http://code.jquery.com/jquery-1.11.3.min.js" %>
+	<%= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" %>
+	<%= javascript_include_tag "http://rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js" %>
+	<%= javascript_include_tag "jquery.transit.min" %>
+	<%= javascript_include_tag "picker" %>
+	<%= javascript_include_tag "picker.date" %>
+	<%= javascript_include_tag "picker.time" %>
+	<%= javascript_include_tag "legacy" %>
+	<%= javascript_include_tag "map" %>
+</head>
+<body>
+	<div id="base">
+	    <div id="map"></div>
+		<div id="sidebar">
+			<div id="sidebar__inner" class="_scroll">
+				<div id="sidebar__logo">
+					<a href="./" title="スタート画面">
+						<%= ittekiter_logo %>
+					</a>
+				</div>
+				<div class="panel-group" id="alibi-list" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading collapsed" role="button" data-toggle="collapse" data-parent="#alibi-list" href="#alibi-list-add" aria-expanded="false" aria-controls="alibi-list-add">
+							<h4 class="panel-title">
+							<i class="glyphicon glyphicon-plus"></i>&emsp;新規作成
+							</h4>
+						</div>
+						<div id="alibi-list-add" class="panel-collapse collapse alibi-collapse" role="tabpanel" aria-labelledby="headingAlibiListAdd">
+							<div class="panel-body">
+								<form>
+									<div class="form-group">
+										<label>出発地</label>
+										<div class="form-places-group">
+											<span class="form-places-addon"><span class="form-places-addon-inner">A.</span></span>
+											<input role="button" class="form-places place-origin" type="text" placeholder="どこから？">
+										</div>
+									</div>
+									<div class="form-group" style="margin-bottom: 0;">
+										<label>目的地</label>
+										<div class="form-places-group">
+											<span class="form-places-addon"><span class="form-places-addon-inner">B.</span></span>
+											<input role="button" class="form-places place-destination" type="text" placeholder="どこいく？">
+										</div>
+										<div class="clearfix">
+											<span role="button" class="form-places-button form-places-add"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp;目的地を追加</span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>日時</label>
+										<div class="clearfix">
+											<input role="button" class="form-places form-places-date place-day" type="text" placeholder="いついく？">
+											<input role="button" class="form-places form-places-date place-time" type="text" placeholder="時間">
+										</div>
+									</div>
+									<button type="button" class="btn btn-primary btn-block search_root add_root" disabled>作成</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+	    	</div>
+			<button id="base__toggle_sidebar" type="button">
+				<i class="glyphicon glyphicon-triangle-right"></i>
+			</button>
+	    </div>
+	</div>
+	<div id="overlay" class="_scroll">
+		<div id="overlay__inner">
+			<div id="overlay__logo">
+				<%= ittekiter_logo %>
+			</div>
+			<div id="overlay__form">
+				<div id="overlay__form__inner">
+					<div id="overlay__form__conntent">
+						<form id="overlay__form__content__inner">
+							<div class="form-group">
+								<input id="set_from" class="form-control where_from place-origin" type="text" placeholder="どこから？">
+							</div>
+							<div class="form-group">
+								<input id="set_to" class="form-control where_to place-destination" type="text" placeholder="どこいく？">
+							</div>
+							<div class="form-group">
+								<input id="set_date" class="form-control when_date place-day" type="text" placeholder="いついく？">
+								<input id="set_time" class="form-control when_time place-time" type="text" placeholder="時間">
+							</div>
+							<div class="form-group">
+								<button id="make_alibi" type="button" class="btn btn-primary btn-block search_root <% if !current_user %>abs_disable<% end %>" disabled>アリバイ作成</button>
+							</div>
+							<% if current_user %>
+                             <button id="sign_out" type="button" class="btn btn-info btn-block redirect"><%= image_tag("twitter_w.svg",:size => "20x20") %> ログアウト</button>
+                            <% else %>
+                            <button id="sign_in" type="button" class="btn btn-info btn-block redirect"><%= image_tag("twitter_w.svg",:size => "20x20") %> Twitterでログイン</button>
+                            <% end %>
+						</form>
+					</div>
+				</div>
+				<% if current_user %>
+				<button id="overlay__goimadoko" type="button" class="btn btn-default btn-block">いまどこ</button>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div id="picker_container"></div>
+</body>
+</html>

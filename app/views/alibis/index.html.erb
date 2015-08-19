@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Alibis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>dep time</th>
+      <th>route object</th>
+      <th>user id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @alibis.each do |alibi| %>
+      <tr>
+        <td><%= alibi.dep_time %></td>
+        <td><%= alibi.route_object %></td>
+        <td><%= alibi.user_id %></td>
+        <td><%= link_to 'Show', alibi %></td>
+        <td><%= link_to 'Edit', edit_alibi_path(alibi) %></td>
+        <td><%= link_to 'Destroy', alibi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Alibi', new_alibi_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@twicont) do |f| %>
+  <% if @twicont.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@twicont.errors.count, "error") %> prohibited this twicont from being saved:</h2>
+
+      <ul>
+      <% @twicont.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :twidt %><br>
+    <%= f.datetime_select :twidt %>
+  </div>
+  <div class="field">
+    <%= f.label :twict %><br>
+    <%= f.text_field :twict %>
+  </div>
+  <div class="field">
+    <%= f.label :alibi_id %><br>
+    <%= f.number_field :alibi_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

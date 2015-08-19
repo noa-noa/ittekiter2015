@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dep time:</strong>
+  <%= @alibi.dep_time %>
+</p>
+
+<p>
+  <strong>Route object:</strong>
+  <%= @alibi.route_object %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @alibi.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_alibi_path(@alibi) %> |
+<%= link_to 'Back', alibis_path %>

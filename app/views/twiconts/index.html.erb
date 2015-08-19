@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Twiconts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Twidt</th>
+      <th>Twict</th>
+      <th>Alibi</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @twiconts.each do |twicont| %>
+      <tr>
+        <td><%= twicont.twidt %></td>
+        <td><%= twicont.twict %></td>
+        <td><%= twicont.alibi_id %></td>
+        <td><%= twicont.user_id %></td>
+        <td><%= link_to 'Show', twicont %></td>
+        <td><%= link_to 'Edit', edit_twicont_path(twicont) %></td>
+        <td><%= link_to 'Destroy', twicont, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Twicont', new_twicont_path %>
